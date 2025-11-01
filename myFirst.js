@@ -38,25 +38,25 @@ let express = require("express")
 
 let app = express()
 app.use(express.json())//frontend theke backend data patabe
-let myToken="12345"
+let myToken = "12345"
 
-let checkToken=(req,res,next)=>{
+let checkToken = (req, res, next) => {
   // console.log("Welcome")
   console.log(req.query.token);
-  if(req.query.token==""||req.query.token==undefined){
+  if (req.query.token == "" || req.query.token == undefined) {
     return res.send(
       {
-        status:0,
-        msg:"Please Fill the Token"
+        status: 0,
+        msg: "Please Fill the Token"
       }
     )
   }
 
-  if(req.query.token!=myToken){
+  if (req.query.token != myToken) {
     return res.send(
       {
-        status:0,
-        msg:"please fill the correct token"
+        status: 0,
+        msg: "please fill the correct token"
       }
     )
   }
@@ -84,11 +84,11 @@ app.post("/login", (req, res) => {
   console.log(req.body)
 
   res.status(200).json(
-      {
+    {
       status: 1,
       msg: "Hello i am from login page",
       data: req.body,
-      queryData:req.query
+      queryData: req.query
     }
   )
 
