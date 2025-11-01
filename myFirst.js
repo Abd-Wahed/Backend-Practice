@@ -35,40 +35,41 @@
 // when using express
 
 let express = require("express")
+const { checkToken } = require("./checkTokenMiddleware")
 
 let app = express()
 app.use(express.json())//frontend theke backend data patabe
-let myToken = "12345"
+// let myToken = "12345"
 
-let checkToken = (req, res, next) => {
-  // console.log("Welcome")
-  console.log(req.query.token);
-  if (req.query.token == "" || req.query.token == undefined) {
-    return res.send(
-      {
-        status: 0,
-        msg: "Please Fill the Token"
-      }
-    )
-  }
+// let checkToken = (req, res, next) => {
+//   // console.log("Welcome")
+//   console.log(req.query.token);
+//   if (req.query.token == "" || req.query.token == undefined) {
+//     return res.send(
+//       {
+//         status: 0,
+//         msg: "Please Fill the Token"
+//       }
+//     )
+//   }
 
-  if (req.query.token != myToken) {
-    return res.send(
-      {
-        status: 0,
-        msg: "please fill the correct token"
-      }
-    )
-  }
-  next();
-}
-app.use(checkToken)
+//   if (req.query.token != myToken) {
+//     return res.send(
+//       {
+//         status: 0,
+//         msg: "please fill the correct token"
+//       }
+//     )
+//   }
+//   next();
+// }
+// app.use(checkToken)
 
 app.get("/", (req, res) => {
   res.send({ status: 1, msg: "Home page API" })
 })
 
-app.get("/news", (req, res) => {
+app.get("/news", checkToken,(req, res) => {
   res.send({
     status: 2,
     msg: "hello,i am from the news portal"
