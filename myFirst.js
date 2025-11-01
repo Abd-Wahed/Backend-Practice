@@ -35,6 +35,7 @@
 // when using express
 
 let express = require("express")
+require("dotenv").config()
 const { checkToken } = require("./checkTokenMiddleware")
 
 let app = express()
